@@ -113,6 +113,8 @@ typedef enum {
 
 @property (nonatomic,assign) CGFloat xBeyond;           //x轴允许超出的偏移量（仅填充布局，默认3px）
 
+@property (nonatomic,assign) BOOL isRTL;              //是否RTL朝向
+
 //每个section的每一列的高度
 @property (nonatomic, strong) NSMutableArray *collectionHeightsArray;
 //存放每一个cell的属性
