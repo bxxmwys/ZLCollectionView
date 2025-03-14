@@ -520,8 +520,21 @@ typedef NS_ENUM(NSUInteger, LewScrollDirction) {
     CGFloat proofedPercentage = fmax(fmin(1.0f, percentage), 0.0f);
     return value * proofedPercentage;
 }
+
 - (void)forceSetIsNeedReCalculateAllLayout:(BOOL)isNeedReCalculateAllLayout
 {
     _isNeedReCalculateAllLayout = isNeedReCalculateAllLayout;
 }
+
+- (UIUserInterfaceLayoutDirection)effectiveUserInterfaceLayoutDirection {
+    if (self.isRTL) {
+        return UIUserInterfaceLayoutDirectionRightToLeft;
+    }
+    return UIUserInterfaceLayoutDirectionLeftToRight;
+}
+
+- (BOOL)flipsHorizontallyInOppositeLayoutDirection{
+    return  YES;
+}
+
 @end
