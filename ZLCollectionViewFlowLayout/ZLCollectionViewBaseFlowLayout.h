@@ -115,6 +115,8 @@ typedef enum {
 
 @property (nonatomic,assign) BOOL isRTL;              //是否RTL朝向
 
+@property (nonatomic,assign) BOOL isNeedRefreshWhenBoundsChange;    //当大小改变时，是否刷新，默认no
+
 //每个section的每一列的高度
 @property (nonatomic, strong) NSMutableArray *collectionHeightsArray;
 //存放每一个cell的属性
@@ -125,6 +127,11 @@ typedef enum {
 //是否需要重新计算所有布局
 //内部控制，一般情况外部无需干预(内部会在外部调用reloadData,insertSections,insertItems,deleteItems...等方法调用时将此属性自动置为YES)
 @property (nonatomic, assign, readonly) BOOL isNeedReCalculateAllLayout;
+
+// 当调用系统的invalidateLayout方法时，会走到重写的invalidateLayoutWithContext方法里，
+// 然后isNeedReCalculateAllLayout被置NO，导致根本无法刷新layout；
+// 在不改变原有逻辑的情况下，增加这个值，在调用invalidateLayout前设置一下
+@property (nonatomic,assign) BOOL isCanCalculateLayoutForce;
 
 //提供一个方法来设置isNeedReCalculateAllLayout (之所以提供是因为特殊情况下外部可能需要强制重新计算布局)
 //比如需要强制刷新布局时，可以先调用此函数设置为YES, 一般情况外部无需干预

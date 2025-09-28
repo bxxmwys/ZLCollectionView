@@ -30,9 +30,11 @@
     [super prepareLayout];
     
     //这里很关键，不加此判断在悬浮情况下将卡的怀疑人生...
-    if (!self.isNeedReCalculateAllLayout) {
+    if (!self.isNeedReCalculateAllLayout && !self.isCanCalculateLayoutForce) {
         return;
     }
+    // 清除标记
+    self.isCanCalculateLayoutForce = NO;
     
     CGFloat totalHeight = self.collectionView.frame.size.height;
     CGFloat x = 0;
